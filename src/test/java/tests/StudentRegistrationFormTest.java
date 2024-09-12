@@ -51,8 +51,7 @@ public class StudentRegistrationFormTest {
         $(byText("April")).click();
         $(".react-datepicker__year-select").click(); //выбор года
         $(byText("1992")).click();
-        $(".react-datepicker__month").click(); //выбор дня
-        $(byText("26")).click(); //
+        $(".react-datepicker__day--026").click(); //выбор дня
 
         $("#subjectsInput").setValue(subject).pressEnter(); //выбор в списке значения Computer Science
         $("#hobbiesWrapper").$(byText(hobby)).click(); //выбор хобби Reading
