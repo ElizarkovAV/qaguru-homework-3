@@ -31,7 +31,7 @@ public class StudentRegistrationFormTest {
         String city = "Karnal";
         String gender = "Female";
         String hobby = "Reading";
-        String date = "5 May,1994";
+        String date = "26 April,1992";
         String picName = "pic.jpg";
 
         //act
