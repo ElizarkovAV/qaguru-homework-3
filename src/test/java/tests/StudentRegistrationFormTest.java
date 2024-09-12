@@ -5,9 +5,9 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.*;
 
 public class StudentRegistrationFormTest {
 
@@ -31,25 +31,31 @@ public class StudentRegistrationFormTest {
         String city = "Karnal";
         String gender = "Female";
         String hobby = "Reading";
-        String date = "29 September,1992";
+        String date = "5 May,1994";
         String picName = "pic.jpg";
 
         //act
         open("/automation-practice-form"); //открыть страницу с формой
+        executeJavaScript("$('#fixedban').remove()"); //убрать окна и баннеры
+        executeJavaScript("$('footer').remove()"); //убрать окна и баннеры
+
         $("#firstName").setValue(name); //ввести имя
         $("#lastName").setValue(lastName); //ввести фамилию
         $("#userEmail").setValue(email); //ввести электронную почту
-        $(byText(gender)).click(); //выбрать женский пол
+        $("#genterWrapper").$(byText(gender)).click(); //выбрать женский пол
         $("#userNumber").setValue(mobile); //ввести номер телефона
 
         //выставление даты в календаре react-datepicker
         $("#dateOfBirthInput").click();
-        $(".react-datepicker__month-select").find("option[value='9']").click();
-        $(".react-datepicker__year-select").find("option[value='1992']").click();
-        $(".react-datepicker__week").find(".react-datepicker__day--029").click();
+        $(".react-datepicker__month-select").click(); //выбор месяца
+        $(byText("April")).click();
+        $(".react-datepicker__year-select").click(); //выбор года
+        $(byText("1992")).click();
+        $(".react-datepicker__month").click(); //выбор дня
+        $(byText("26")).click(); //
 
         $("#subjectsInput").setValue(subject).pressEnter(); //выбор в списке значения Computer Science
-        $(byText(hobby)).click(); //выбор хобби Reading
+        $("#hobbiesWrapper").$(byText(hobby)).click(); //выбор хобби Reading
         $("#uploadPicture").uploadFromClasspath("images/pic.jpg"); //загрузка изображения
         $("#currentAddress").setValue(address); //ввод адреса
 
